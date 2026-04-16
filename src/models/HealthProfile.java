@@ -1,4 +1,4 @@
-public abstract class HealthProfile {
+abstract class HealthProfile {
     protected String name;
     protected double bmi;
     protected MentalStatus mentalStatus;
