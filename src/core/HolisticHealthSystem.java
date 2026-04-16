@@ -1,5 +1,5 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class HolisticHealthSystem {
 
@@ -15,12 +15,8 @@ public class HolisticHealthSystem {
             try {
                 int choice = readMenuInt(1, 3);
                 switch (choice) {
-                    case 1:
-                        runAssessment();
-                        break;
-                    case 2:
-                        viewSavedRecords();
-                        break;
+                    case 1: runAssessment();    break;
+                    case 2: viewSavedRecords(); break;
                     case 3:
                         System.out.println();
                         System.out.println(Ansi.BOLD + Ansi.BRIGHT_GREEN
@@ -38,6 +34,8 @@ public class HolisticHealthSystem {
         scanner.close();
     }
 
+    // ── Main menu printer ────────────────────────────────────────────────────
+
     static void printMainMenu() {
         System.out.println();
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
@@ -46,26 +44,27 @@ public class HolisticHealthSystem {
                 + "  ║              🌿  MAIN MENU  🌿               ║" + Ansi.RESET);
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
                 + "  ╠══════════════════════════════════════════════╣" + Ansi.RESET);
-        System.out.println(Ansi.CYAN + "  ║  " + Ansi.BRIGHT_YELLOW + "1." + Ansi.WHITE
+        System.out.println(Ansi.CYAN  + "  ║  " + Ansi.BRIGHT_YELLOW + "1." + Ansi.WHITE
                 + "  Start Health Assessment                  " + Ansi.CYAN + "║" + Ansi.RESET);
-        System.out.println(Ansi.CYAN + "  ║  " + Ansi.BRIGHT_YELLOW + "2." + Ansi.WHITE
+        System.out.println(Ansi.CYAN  + "  ║  " + Ansi.BRIGHT_YELLOW + "2." + Ansi.WHITE
                 + "  View Saved Records (from file)           " + Ansi.CYAN + "║" + Ansi.RESET);
-        System.out.println(Ansi.CYAN + "  ║  " + Ansi.BRIGHT_YELLOW + "3." + Ansi.WHITE
+        System.out.println(Ansi.CYAN  + "  ║  " + Ansi.BRIGHT_YELLOW + "3." + Ansi.WHITE
                 + "  Exit                                     " + Ansi.CYAN + "║" + Ansi.RESET);
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
                 + "  ╚══════════════════════════════════════════════╝" + Ansi.RESET);
         System.out.print(Ansi.BOLD + Ansi.YELLOW + "\n  ▶  Enter choice (1-3): " + Ansi.RESET);
     }
 
+    // ── helpers ──────────────────────────────────────────────────────────────
+
     static int readMenuInt(int min, int max) throws InvalidMenuChoiceException {
         while (true) {
             String line = scanner.nextLine().trim();
             try {
                 int v = Integer.parseInt(line);
-                if (v < min || v > max) {
+                if (v < min || v > max)
                     throw new InvalidMenuChoiceException(
                             "Please choose between " + min + " and " + max + ".");
-                }
                 return v;
             } catch (NumberFormatException e) {
                 printError("\"" + line + "\" is not a number. Please enter a number between "
@@ -99,6 +98,8 @@ public class HolisticHealthSystem {
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_GREEN + "  ✔  " + msg + Ansi.RESET);
     }
 
+    // ── main flows ────────────────────────────────────────────────────────────
+
     static void runAssessment() {
         try {
             System.out.println();
@@ -112,10 +113,10 @@ public class HolisticHealthSystem {
             if (name.isEmpty()) name = "User";
 
             MentalStatus mentalStatus = getMentalStatus();
-            double bmi = getBMI();
+            double bmi    = getBMI();
             String bmiCat = bmi < 18.5 ? "Underweight"
-                    : bmi < 25 ? "Normal"
-                    : bmi < 30 ? "Overweight" : "Obese";
+                          : bmi < 25   ? "Normal"
+                          : bmi < 30   ? "Overweight" : "Obese";
 
             System.out.println();
             System.out.printf(Ansi.BOLD + Ansi.BRIGHT_GREEN
@@ -123,9 +124,9 @@ public class HolisticHealthSystem {
 
             Goal goal = getGoal();
 
-            UserProfile profile = new UserProfile(name, bmi, mentalStatus, goal);
-            String workoutPlan = profile.generateWorkoutPlan();
-            String advice = profile.getAdvice();
+            UserProfile profile   = new UserProfile(name, bmi, mentalStatus, goal);
+            String workoutPlan    = profile.generateWorkoutPlan();
+            String advice         = profile.getAdvice();
 
             System.out.println(workoutPlan);
             System.out.println(advice);
@@ -151,19 +152,18 @@ public class HolisticHealthSystem {
                 + "  └──────────────────────────────────────────────┘" + Ansi.RESET);
 
         System.out.println(Ansi.WHITE + "  How would you like to proceed?" + Ansi.RESET);
-        System.out.println(Ansi.CYAN + "  1. " + Ansi.WHITE + "Take the quiz (9 questions)" + Ansi.RESET);
-        System.out.println(Ansi.CYAN + "  2. " + Ansi.WHITE + "I already know my mental state (skip)" + Ansi.RESET);
+        System.out.println(Ansi.CYAN  + "  1. " + Ansi.WHITE + "Take the quiz (9 questions)"           + Ansi.RESET);
+        System.out.println(Ansi.CYAN  + "  2. " + Ansi.WHITE + "I already know my mental state (skip)" + Ansi.RESET);
         System.out.print(Ansi.BOLD + Ansi.YELLOW + "  ▶  Enter choice (1-2): " + Ansi.RESET);
 
         int mode = readMenuInt(1, 2);
 
         if (mode == 2) {
             System.out.println("\n" + Ansi.WHITE + "  Select your current mental state:" + Ansi.RESET);
-            System.out.println(Ansi.CYAN + "  1. " + Ansi.BRIGHT_RED + "Depressed" + Ansi.RESET);
-            System.out.println(Ansi.CYAN + "  2. " + Ansi.BRIGHT_YELLOW + "Stressed" + Ansi.RESET);
-            System.out.println(Ansi.CYAN + "  3. " + Ansi.BRIGHT_GREEN + "Normal" + Ansi.RESET);
+            System.out.println(Ansi.CYAN + "  1. " + Ansi.BRIGHT_RED    + "Depressed" + Ansi.RESET);
+            System.out.println(Ansi.CYAN + "  2. " + Ansi.BRIGHT_YELLOW + "Stressed"  + Ansi.RESET);
+            System.out.println(Ansi.CYAN + "  3. " + Ansi.BRIGHT_GREEN  + "Normal"    + Ansi.RESET);
             System.out.print(Ansi.BOLD + Ansi.YELLOW + "  ▶  Enter choice (1-3): " + Ansi.RESET);
-
             int pick = readMenuInt(1, 3);
             switch (pick) {
                 case 1: return MentalStatus.DEPRESSED;
@@ -171,7 +171,6 @@ public class HolisticHealthSystem {
                 case 3: return MentalStatus.NORMAL;
             }
         }
-
         return runMentalQuiz();
     }
 
@@ -240,7 +239,7 @@ public class HolisticHealthSystem {
         };
 
         int totalScore = 0;
-        int maxScore = questions.length * 2;
+        int maxScore   = questions.length * 2;
 
         for (int qi = 0; qi < questions.length; qi++) {
             String[] q = questions[qi];
@@ -249,9 +248,9 @@ public class HolisticHealthSystem {
                     + " ─────────────────────────────────────┐" + Ansi.RESET);
             System.out.println(Ansi.BOLD + Ansi.WHITE + "  │  " + q[0] + Ansi.RESET);
             System.out.println(Ansi.BRIGHT_CYAN + "  └────────────────────────────────────────────┘" + Ansi.RESET);
-            System.out.println(Ansi.BOLD + Ansi.BRIGHT_RED + "     " + q[1] + Ansi.RESET);
+            System.out.println(Ansi.BOLD + Ansi.BRIGHT_RED    + "     " + q[1] + Ansi.RESET);
             System.out.println(Ansi.BOLD + Ansi.BRIGHT_YELLOW + "     " + q[2] + Ansi.RESET);
-            System.out.println(Ansi.BOLD + Ansi.BRIGHT_GREEN + "     " + q[3] + Ansi.RESET);
+            System.out.println(Ansi.BOLD + Ansi.BRIGHT_GREEN  + "     " + q[3] + Ansi.RESET);
 
             while (true) {
                 System.out.print(Ansi.BOLD + Ansi.CYAN + "\n  ▶  Your answer (A / B / C): " + Ansi.RESET);
@@ -262,11 +261,9 @@ public class HolisticHealthSystem {
                         case "A": totalScore += 2; break;
                         case "B": totalScore += 1; break;
                     }
-
-                    String fb = answer.equals("A") ? Ansi.RED + "  ✘  Noted. Take care of yourself."
-                            : answer.equals("B") ? Ansi.YELLOW + "  ~  Noted."
-                            : Ansi.GREEN + "  ✔  Great!";
-
+                    String fb = answer.equals("A") ? Ansi.RED    + "  ✘  Noted. Take care of yourself."
+                              : answer.equals("B") ? Ansi.YELLOW + "  ~  Noted."
+                              : Ansi.GREEN + "  ✔  Great!";
                     System.out.println(fb + Ansi.RESET);
                     break;
                 } else {
@@ -282,7 +279,7 @@ public class HolisticHealthSystem {
             System.out.println();
         }
 
-        int pct = (int) Math.round((totalScore * 100.0) / maxScore);
+        int pct  = (int) Math.round((totalScore * 100.0) / maxScore);
         String bar = buildProgressBar(pct, 30);
 
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
@@ -296,7 +293,7 @@ public class HolisticHealthSystem {
         MentalStatus result;
         if (totalScore >= 11) {
             result = MentalStatus.DEPRESSED;
-            System.out.println(Ansi.BOLD + Ansi.BRIGHT_RED + "  ║  Result  : DEPRESSED 😔" + Ansi.RESET);
+            System.out.println(Ansi.BOLD + Ansi.BRIGHT_RED    + "  ║  Result  : DEPRESSED 😔" + Ansi.RESET);
             System.out.println(Ansi.RED
                     + "  ║  Your responses suggest signs of depression.\n"
                     + "  ║  Please be gentle with yourself and seek support." + Ansi.RESET);
@@ -308,12 +305,11 @@ public class HolisticHealthSystem {
                     + "  ║  Rest and light activity can help a great deal." + Ansi.RESET);
         } else {
             result = MentalStatus.NORMAL;
-            System.out.println(Ansi.BOLD + Ansi.BRIGHT_GREEN + "  ║  Result  : NORMAL 😊" + Ansi.RESET);
+            System.out.println(Ansi.BOLD + Ansi.BRIGHT_GREEN  + "  ║  Result  : NORMAL 😊" + Ansi.RESET);
             System.out.println(Ansi.GREEN
                     + "  ║  You appear to be in a good mental state!\n"
                     + "  ║  Keep up the great work." + Ansi.RESET);
         }
-
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
                 + "  ╚══════════════════════════════════════════════╝" + Ansi.RESET);
 
@@ -322,10 +318,8 @@ public class HolisticHealthSystem {
 
     static String buildProgressBar(int pct, int width) {
         int filled = (int) Math.round(pct / 100.0 * width);
-        String bar = "█".repeat(filled) + "░".repeat(width - filled);
-        String color = pct >= 60 ? Ansi.BRIGHT_RED
-                : pct >= 28 ? Ansi.BRIGHT_YELLOW
-                : Ansi.BRIGHT_GREEN;
+        String bar   = "█".repeat(filled) + "░".repeat(width - filled);
+        String color = pct >= 60 ? Ansi.BRIGHT_RED : pct >= 28 ? Ansi.BRIGHT_YELLOW : Ansi.BRIGHT_GREEN;
         return color + "[" + bar + "] " + pct + "%" + Ansi.RESET;
     }
 
@@ -336,12 +330,11 @@ public class HolisticHealthSystem {
                 + "  │    Step 2 · BMI Calculation ⚖               │\n"
                 + "  └──────────────────────────────────────────────┘" + Ansi.RESET);
 
-        double weight = readPositiveDouble(Ansi.CYAN + "  ▶  Enter your weight (kg): " + Ansi.RESET);
+        double weight   = readPositiveDouble(Ansi.CYAN + "  ▶  Enter your weight (kg): " + Ansi.RESET);
         double heightCm = readPositiveDouble(Ansi.CYAN + "  ▶  Enter your height (cm): " + Ansi.RESET);
 
-        if (weight > 500 || heightCm > 300) {
+        if (weight > 500 || heightCm > 300)
             throw new InvalidBMIInputException("Values seem unrealistic. Please check your input.");
-        }
 
         double heightM = heightCm / 100.0;
         return weight / (heightM * heightM);
@@ -354,8 +347,8 @@ public class HolisticHealthSystem {
                 + "  │    Step 3 · Your Health Goal 🎯              │\n"
                 + "  └──────────────────────────────────────────────┘" + Ansi.RESET);
         System.out.println(Ansi.WHITE + "  What is your main goal?" + Ansi.RESET);
-        System.out.println(Ansi.CYAN + "  1. " + Ansi.MAGENTA + "Lose Weight" + Ansi.RESET);
-        System.out.println(Ansi.CYAN + "  2. " + Ansi.MAGENTA + "Build Muscle" + Ansi.RESET);
+        System.out.println(Ansi.CYAN + "  1. " + Ansi.MAGENTA + "Lose Weight"     + Ansi.RESET);
+        System.out.println(Ansi.CYAN + "  2. " + Ansi.MAGENTA + "Build Muscle"    + Ansi.RESET);
         System.out.println(Ansi.CYAN + "  3. " + Ansi.MAGENTA + "Maintain Weight" + Ansi.RESET);
         System.out.print(Ansi.BOLD + Ansi.YELLOW + "  ▶  Enter choice (1-3): " + Ansi.RESET);
 
@@ -365,15 +358,17 @@ public class HolisticHealthSystem {
             case 2: return Goal.BUILD_MUSCLE;
             case 3: return Goal.MAINTAIN_WEIGHT;
         }
-
         throw new InvalidMenuChoiceException("Please choose 1, 2, or 3 for goal.");
     }
+
+    // ── View Saved Records (with Back option) ─────────────────────────────────
 
     static void viewSavedRecords() {
         boolean inRecordMenu = true;
 
         while (inRecordMenu) {
             System.out.println();
+            // Header
             System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
                     + "  ╔══════════════════════════════════════════════╗" + Ansi.RESET);
             System.out.println(Ansi.BOLD + Ansi.BRIGHT_WHITE
@@ -385,6 +380,7 @@ public class HolisticHealthSystem {
                 List<String> names = FileUtil.listAllNames();
 
                 if (names.isEmpty()) {
+                    // Empty state — still offer Back
                     System.out.println(Ansi.BRIGHT_CYAN
                             + "  ║                                              ║" + Ansi.RESET);
                     System.out.println(Ansi.YELLOW
@@ -398,15 +394,12 @@ public class HolisticHealthSystem {
                     System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
                             + "  ╚══════════════════════════════════════════════╝" + Ansi.RESET);
                     System.out.print(Ansi.BOLD + Ansi.YELLOW + "\n  ▶  Enter choice (0): " + Ansi.RESET);
-
-                    try {
-                        readMenuInt(0, 0);
-                    } catch (InvalidMenuChoiceException ignored) {}
-
+                    try { readMenuInt(0, 0); } catch (InvalidMenuChoiceException ignored) {}
                     inRecordMenu = false;
                     continue;
                 }
 
+                // List people
                 System.out.println(Ansi.CYAN + "  ║  " + Ansi.BRIGHT_YELLOW + "0."
                         + Ansi.BRIGHT_WHITE + "  ← Back to Main Menu" + Ansi.RESET
                         + " ".repeat(23) + Ansi.CYAN + "║" + Ansi.RESET);
@@ -420,9 +413,9 @@ public class HolisticHealthSystem {
 
                 for (int i = 0; i < names.size(); i++) {
                     String nameEntry = names.get(i);
+                    // Pad to fill the box
                     String label = (i + 1) + ".  " + nameEntry;
-                    int spaces = 44 - 4 - label.length();
-
+                    int spaces   = 44 - 4 - label.length(); // 4 = "  ║  "
                     System.out.println(Ansi.CYAN + "  ║  " + Ansi.BRIGHT_YELLOW
                             + (i + 1) + "." + Ansi.BRIGHT_WHITE + "  " + nameEntry
                             + " ".repeat(Math.max(1, spaces)) + Ansi.CYAN + "║" + Ansi.RESET);
@@ -437,15 +430,18 @@ public class HolisticHealthSystem {
                 String raw = scanner.nextLine().trim().toUpperCase();
 
                 if (raw.equals("0")) {
+                    // ── Back to main menu ──────────────────────────────────
                     printSuccess("Returning to Main Menu...");
                     inRecordMenu = false;
 
                 } else if (raw.equals("A")) {
+                    // ── Show all records ───────────────────────────────────
                     System.out.println(Ansi.BOLD + Ansi.BRIGHT_WHITE + "\n  Showing all records:" + Ansi.RESET);
                     FileUtil.readFromFile();
                     pressEnterToContinue();
 
                 } else {
+                    // ── Show specific person ───────────────────────────────
                     try {
                         int pick = Integer.parseInt(raw);
                         if (pick < 1 || pick > names.size()) {
@@ -469,6 +465,7 @@ public class HolisticHealthSystem {
         }
     }
 
+    /** Pause until the user presses Enter — keeps the record visible before re-showing the menu. */
     static void pressEnterToContinue() {
         System.out.println();
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
