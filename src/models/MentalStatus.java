@@ -1,3 +1,3 @@
-enum MentalStatus {
+public enum MentalStatus {
     DEPRESSED, STRESSED, NORMAL
 }
