@@ -1,15 +1,13 @@
 import java.util.*;
 
-class UserProfile extends HealthProfile implements HealthPlan {
+public class UserProfile extends HealthProfile implements HealthPlan {
 
     public UserProfile(String name, double bmi, MentalStatus mentalStatus, Goal goal) {
         super(name, bmi, mentalStatus, goal);
     }
 
     @Override
-    public String getProfileType() {
-        return "Standard User";
-    }
+    public String getProfileType() { return "Standard User"; }
 
     @Override
     public String generateWorkoutPlan() {
@@ -17,35 +15,34 @@ class UserProfile extends HealthProfile implements HealthPlan {
         StringBuilder sb = new StringBuilder();
 
         sb.append("\n");
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN + "  ╔══════════════════════════════════════════════╗\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_WHITE + "  ║        🏋  PERSONALIZED WORKOUT PLAN  🧘     ║\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN  + "  ╔══════════════════════════════════════════════╗\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_WHITE  + "  ║        🏋  PERSONALIZED WORKOUT PLAN  🧘     ║\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN   + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
 
-        sb.append(Ansi.BOLD + Ansi.CYAN + "  ║  Name    : " + Ansi.BRIGHT_WHITE + padRight(name, 33) + "║\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.CYAN + "  ║  BMI     : " + bmiColor
+        sb.append(Ansi.BOLD + Ansi.CYAN    + "  ║  Name    : " + Ansi.BRIGHT_WHITE  + padRight(name, 33) + "║\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.CYAN    + "  ║  BMI     : " + bmiColor
                 + padRight(String.format("%.1f", bmi) + " (" + getBMICategory() + ")", 33) + Ansi.RESET
                 + Ansi.BOLD + Ansi.CYAN + "║\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.CYAN + "  ║  Mental  : " + getMentalColor()
+        sb.append(Ansi.BOLD + Ansi.CYAN    + "  ║  Mental  : " + getMentalColor()
                 + padRight(mentalStatus.toString(), 33) + Ansi.RESET
                 + Ansi.BOLD + Ansi.CYAN + "║\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.CYAN + "  ║  Goal    : " + Ansi.BRIGHT_YELLOW
+        sb.append(Ansi.BOLD + Ansi.CYAN    + "  ║  Goal    : " + Ansi.BRIGHT_YELLOW
                 + padRight(goal.toString(), 33) + Ansi.RESET
                 + Ansi.BOLD + Ansi.CYAN + "║\n" + Ansi.RESET);
 
         sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
         sb.append(Ansi.BOLD + Ansi.BRIGHT_WHITE + "  ║           📅  WEEKLY SCHEDULE                ║\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN  + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
 
         List<String> schedule = buildSchedule();
-        String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-        String[] dayIcons = {"🌅", "🌤 ", "🌥 ", "⛅", "🌞", "🎉", "💤"};
+        String[] days         = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+        String[] dayIcons     = {"🌅", "🌤 ", "🌥 ", "⛅", "🌞", "🎉", "💤"};
 
         for (int i = 0; i < days.length; i++) {
-            String activity = (i < schedule.size()) ? schedule.get(i) : "Rest";
+            String activity   = (i < schedule.size()) ? schedule.get(i) : "Rest";
             boolean isWeekend = days[i].equals("Saturday") || days[i].equals("Sunday");
-            String dayColor = isWeekend ? Ansi.BRIGHT_MAGENTA : Ansi.BRIGHT_YELLOW;
-            String actColor = isWeekend ? Ansi.MAGENTA : Ansi.WHITE;
-
+            String dayColor   = isWeekend ? Ansi.BRIGHT_MAGENTA : Ansi.BRIGHT_YELLOW;
+            String actColor   = isWeekend ? Ansi.MAGENTA : Ansi.WHITE;
             sb.append("  " + Ansi.BOLD + Ansi.BRIGHT_CYAN + "║  " + Ansi.RESET
                     + dayIcons[i] + " " + Ansi.BOLD + dayColor + padRight(days[i], 11) + Ansi.RESET
                     + Ansi.BLUE + "│ " + Ansi.RESET
@@ -64,19 +61,19 @@ class UserProfile extends HealthProfile implements HealthPlan {
     private String getBMIColor() {
         switch (getBMICategory()) {
             case "Underweight": return Ansi.BRIGHT_CYAN;
-            case "Normal": return Ansi.BRIGHT_GREEN;
-            case "Overweight": return Ansi.BRIGHT_YELLOW;
-            case "Obese": return Ansi.BRIGHT_RED;
-            default: return Ansi.WHITE;
+            case "Normal":      return Ansi.BRIGHT_GREEN;
+            case "Overweight":  return Ansi.BRIGHT_YELLOW;
+            case "Obese":       return Ansi.BRIGHT_RED;
+            default:            return Ansi.WHITE;
         }
     }
 
     private String getMentalColor() {
         switch (mentalStatus) {
             case DEPRESSED: return Ansi.BRIGHT_RED;
-            case STRESSED: return Ansi.BRIGHT_YELLOW;
-            case NORMAL: return Ansi.BRIGHT_GREEN;
-            default: return Ansi.WHITE;
+            case STRESSED:  return Ansi.BRIGHT_YELLOW;
+            case NORMAL:    return Ansi.BRIGHT_GREEN;
+            default:        return Ansi.WHITE;
         }
     }
 
@@ -185,12 +182,13 @@ class UserProfile extends HealthProfile implements HealthPlan {
 
         sb.append("\n");
         sb.append(Ansi.BOLD + Ansi.BRIGHT_MAGENTA + "  ╔══════════════════════════════════════════════╗\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_WHITE + "  ║          💡  PERSONALIZED HEALTH ADVICE      ║\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_MAGENTA + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_WHITE    + "  ║          💡  PERSONALIZED HEALTH ADVICE      ║\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_MAGENTA  + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
 
+        // Mental advice
         switch (mentalStatus) {
             case DEPRESSED:
-                sb.append(Ansi.BOLD + Ansi.BRIGHT_RED + "  ║  🧠 MENTAL  " + Ansi.RESET
+                sb.append(Ansi.BOLD + Ansi.BRIGHT_RED    + "  ║  🧠 MENTAL  " + Ansi.RESET
                         + Ansi.RED + "You are not alone. Start gentle.\n" + Ansi.RESET);
                 sb.append(Ansi.RED + "  ║            Consider speaking with a professional.\n" + Ansi.RESET);
                 break;
@@ -200,21 +198,22 @@ class UserProfile extends HealthProfile implements HealthPlan {
                 sb.append(Ansi.YELLOW + "  ║            Prioritize sleep and reduce caffeine.\n" + Ansi.RESET);
                 break;
             case NORMAL:
-                sb.append(Ansi.BOLD + Ansi.BRIGHT_GREEN + "  ║  🧠 MENTAL  " + Ansi.RESET
+                sb.append(Ansi.BOLD + Ansi.BRIGHT_GREEN  + "  ║  🧠 MENTAL  " + Ansi.RESET
                         + Ansi.GREEN + "Great mental state! Stay consistent.\n" + Ansi.RESET);
                 break;
         }
 
         sb.append(Ansi.BRIGHT_MAGENTA + "  ║" + Ansi.RESET + "\n");
 
+        // BMI advice
         switch (getBMICategory()) {
             case "Underweight":
-                sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN + "  ║  ⚖  BMI    " + Ansi.RESET
+                sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN   + "  ║  ⚖  BMI    " + Ansi.RESET
                         + Ansi.CYAN + "Eat nutritious, calorie-dense foods.\n" + Ansi.RESET);
                 sb.append(Ansi.CYAN + "  ║            Avoid skipping meals.\n" + Ansi.RESET);
                 break;
             case "Normal":
-                sb.append(Ansi.BOLD + Ansi.BRIGHT_GREEN + "  ║  ⚖  BMI    " + Ansi.RESET
+                sb.append(Ansi.BOLD + Ansi.BRIGHT_GREEN  + "  ║  ⚖  BMI    " + Ansi.RESET
                         + Ansi.GREEN + "BMI is healthy! Maintain balance.\n" + Ansi.RESET);
                 sb.append(Ansi.GREEN + "  ║            Keep up your diet and exercise.\n" + Ansi.RESET);
                 break;
@@ -224,7 +223,7 @@ class UserProfile extends HealthProfile implements HealthPlan {
                 sb.append(Ansi.YELLOW + "  ║            Aim for 7,000+ steps daily.\n" + Ansi.RESET);
                 break;
             case "Obese":
-                sb.append(Ansi.BOLD + Ansi.BRIGHT_RED + "  ║  ⚖  BMI    " + Ansi.RESET
+                sb.append(Ansi.BOLD + Ansi.BRIGHT_RED    + "  ║  ⚖  BMI    " + Ansi.RESET
                         + Ansi.RED + "Consult a doctor before starting.\n" + Ansi.RESET);
                 sb.append(Ansi.RED + "  ║            Low-impact exercise is best for now.\n" + Ansi.RESET);
                 break;
@@ -232,6 +231,7 @@ class UserProfile extends HealthProfile implements HealthPlan {
 
         sb.append(Ansi.BRIGHT_MAGENTA + "  ║" + Ansi.RESET + "\n");
 
+        // Goal advice
         switch (goal) {
             case LOSE_WEIGHT:
                 sb.append(Ansi.BOLD + Ansi.BRIGHT_MAGENTA + "  ║  🎯 GOAL   " + Ansi.RESET
