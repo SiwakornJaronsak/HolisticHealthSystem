@@ -1,0 +1,64 @@
+##RECORD_START##:Chaiy
+==========================================
+Name    : Chaiy
+BMI     : 18.5 (Normal)
+Mental  : NORMAL
+Goal    : BUILD_MUSCLE
+
+  ==========================================
+       PERSONALIZED WORKOUT PLAN          
+  ==========================================
+  Name   : Chaiy
+  BMI    : 18.5 (Normal)
+  Mental : NORMAL
+  Goal   : BUILD_MUSCLE
+  ------------------------------------------
+  WEEKLY SCHEDULE:
+  Monday -> Chest + Triceps (Weights)
+  Tuesday -> Back + Biceps (Weights)
+  Wednesday -> Rest + Stretching
+  Thursday -> Legs + Glutes (Weights)
+  Friday -> Shoulders + Core (Weights)
+  Saturday -> Full Body Light + Cardio 20 min
+  Sunday -> Full Rest
+  ==========================================
+
+  ----------- HEALTH ADVICE -----------  
+  [Mental]  Great mental state! Stay consistent and motivated.
+  [BMI]     BMI is healthy. Maintain balance between diet and exercise.
+  [Goal]    Eat enough protein (1.6-2.2g per kg body weight).
+  -------------------------------------  
+==========================================
+##RECORD_END##
+##RECORD_START##:Ou
+==========================================
+Name    : Ou
+BMI     : 17.3 (Underweight)
+Mental  : NORMAL
+Goal    : MAINTAIN_WEIGHT
+
+  ==========================================
+       PERSONALIZED WORKOUT PLAN          
+  ==========================================
+  Name   : Ou
+  BMI    : 17.3 (Underweight)
+  Mental : NORMAL
+  Goal   : MAINTAIN_WEIGHT
+  ------------------------------------------
+  WEEKLY SCHEDULE:
+  Monday -> Cardio 30 min
+  Tuesday -> Strength Training (Light)
+  Wednesday -> Yoga / Pilates 30 min
+  Thursday -> Rest + Stretching
+  Friday -> Cardio 30 min
+  Saturday -> Full Body Light Workout
+  Sunday -> Full Rest
+  ==========================================
+
+  ----------- HEALTH ADVICE -----------  
+  [Mental]  Great mental state! Stay consistent and motivated.
+  [BMI]     Eat nutritious, calorie-dense foods. Avoid skipping meals.
+  [Goal]    Track your intake and output to stay balanced.
+  -------------------------------------  
+==========================================
+##RECORD_END##

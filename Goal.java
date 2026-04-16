@@ -1,0 +1,3 @@
+enum Goal {
+    LOSE_WEIGHT, BUILD_MUSCLE, MAINTAIN_WEIGHT
+}
