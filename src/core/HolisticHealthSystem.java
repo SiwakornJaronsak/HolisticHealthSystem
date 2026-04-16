@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class MainHolisticHealthSystem {
+public class HolisticHealthSystem {
 
     static Scanner scanner = new Scanner(System.in);
     static HealthRecordStore<UserProfile> store = new HealthRecordStore<>();
