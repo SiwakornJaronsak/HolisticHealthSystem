@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Ansi {
+class Ansi {
     static final String RESET          = "\033[0m";
     static final String BOLD           = "\033[1m";
     static final String UNDERLINE      = "\033[4m";
@@ -19,6 +19,7 @@ public class Ansi {
     static final String BRIGHT_MAGENTA = "\033[95m";
     static final String BRIGHT_CYAN    = "\033[96m";
     static final String BRIGHT_WHITE   = "\033[97m";
+
     static final String BG_BLACK       = "\033[40m";
     static final String BG_RED         = "\033[41m";
     static final String BG_GREEN       = "\033[42m";
@@ -48,7 +49,8 @@ public class Ansi {
         System.out.println(BOLD + borderColor + bot + RESET);
     }
 
-    static void printFlexTable(String title, String borderColor, List<String[]> rows, int minInner) {
+    static void printFlexTable(String title, String borderColor,
+                               List<String[]> rows, int minInner) {
         int inner = Math.max(minInner, visibleLen(title) + 4);
         for (String[] r : rows) inner = Math.max(inner, visibleLen(r[0]) + 4);
 
@@ -70,7 +72,7 @@ public class Ansi {
             String color   = r.length > 1 ? r[1] : WHITE;
             int spaces = inner - 2 - visibleLen(content);
             String row = "  ║  " + color + content + RESET
-                    + " ".repeat(Math.max(0, spaces - 2)) + BOLD + borderColor + "║" + RESET;
+                       + " ".repeat(Math.max(0, spaces - 2)) + BOLD + borderColor + "║" + RESET;
             System.out.println(row);
         }
 
