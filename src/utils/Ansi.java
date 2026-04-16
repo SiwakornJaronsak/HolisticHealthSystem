@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Ansi {
+public class Ansi {
     static final String RESET          = "\033[0m";
     static final String BOLD           = "\033[1m";
     static final String UNDERLINE      = "\033[4m";
@@ -19,7 +19,7 @@ class Ansi {
     static final String BRIGHT_MAGENTA = "\033[95m";
     static final String BRIGHT_CYAN    = "\033[96m";
     static final String BRIGHT_WHITE   = "\033[97m";
-
+    // Background colors
     static final String BG_BLACK       = "\033[40m";
     static final String BG_RED         = "\033[41m";
     static final String BG_GREEN       = "\033[42m";
@@ -33,10 +33,17 @@ class Ansi {
         return ansiCode + text + RESET;
     }
 
+    // ── Flexible box helpers ──────────────────────────────────────────────────
+
+    /** Return the visible length of a string (strips ANSI escape codes). */
     static int visibleLen(String s) {
         return s.replaceAll("\033\\[[;\\d]*m", "").length();
     }
 
+    /**
+     * Print a single-row titled box whose width adapts to the title.
+     * Minimum inner width = minWidth (default 40).
+     */
     static void printFlexBox(String title, String borderColor, int minInner) {
         int inner = Math.max(minInner, visibleLen(title) + 4);
         String top = "  ╔" + "═".repeat(inner) + "╗";
@@ -49,8 +56,14 @@ class Ansi {
         System.out.println(BOLD + borderColor + bot + RESET);
     }
 
+    /**
+     * Print a flexible-width box with a top title row + multiple content rows.
+     * rows = list of { contentString, colorCode }.
+     * Width is determined by the widest visible content.
+     */
     static void printFlexTable(String title, String borderColor,
                                List<String[]> rows, int minInner) {
+        // Compute inner width
         int inner = Math.max(minInner, visibleLen(title) + 4);
         for (String[] r : rows) inner = Math.max(inner, visibleLen(r[0]) + 4);
 
@@ -59,18 +72,19 @@ class Ansi {
         String top   = "  ╔" + hBar + "╗";
         String bot   = "  ╚" + hBar + "╝";
 
+        // Title row
         int pad = (inner - visibleLen(title)) / 2;
         String padded = " ".repeat(Math.max(0, pad)) + title;
         String titleRow = "  ║" + padded + " ".repeat(Math.max(0, inner - visibleLen(padded))) + "║";
 
-        System.out.println(BOLD + borderColor + top + RESET);
+        System.out.println(BOLD + borderColor + top      + RESET);
         System.out.println(BOLD + borderColor + titleRow + RESET);
-        System.out.println(BOLD + borderColor + sep + RESET);
+        System.out.println(BOLD + borderColor + sep      + RESET);
 
         for (String[] r : rows) {
             String content = r[0];
             String color   = r.length > 1 ? r[1] : WHITE;
-            int spaces = inner - 2 - visibleLen(content);
+            int spaces = inner - 2 - visibleLen(content); // 2 = leading "  "
             String row = "  ║  " + color + content + RESET
                        + " ".repeat(Math.max(0, spaces - 2)) + BOLD + borderColor + "║" + RESET;
             System.out.println(row);
@@ -79,10 +93,12 @@ class Ansi {
         System.out.println(BOLD + borderColor + bot + RESET);
     }
 
+    /** Print a flexible separator. */
     static void printSep(String color, int width) {
         System.out.println(color + "  " + "─".repeat(width) + RESET);
     }
 
+    /** Print a tag badge. */
     static String badge(String label, String color) {
         return color + BOLD + " ● " + label + " " + RESET;
     }
