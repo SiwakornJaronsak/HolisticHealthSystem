@@ -1,13 +1,15 @@
 import java.util.*;
 
-public class UserProfile extends HealthProfile implements HealthPlan {
+class UserProfile extends HealthProfile implements HealthPlan {
 
     public UserProfile(String name, double bmi, MentalStatus mentalStatus, Goal goal) {
         super(name, bmi, mentalStatus, goal);
     }
 
     @Override
-    public String getProfileType() { return "Standard User"; }
+    public String getProfileType() {
+        return "Standard User";
+    }
 
     @Override
     public String generateWorkoutPlan() {
@@ -15,9 +17,9 @@ public class UserProfile extends HealthProfile implements HealthPlan {
         StringBuilder sb = new StringBuilder();
 
         sb.append("\n");
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN  + "  ╔══════════════════════════════════════════════╗\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_WHITE  + "  ║        🏋  PERSONALIZED WORKOUT PLAN  🧘     ║\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN   + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN + "  ╔══════════════════════════════════════════════╗\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_WHITE + "  ║        🏋  PERSONALIZED WORKOUT PLAN  🧘     ║\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
 
         sb.append(Ansi.BOLD + Ansi.CYAN + "  ║  Name    : " + Ansi.BRIGHT_WHITE + padRight(name, 33) + "║\n" + Ansi.RESET);
         sb.append(Ansi.BOLD + Ansi.CYAN + "  ║  BMI     : " + bmiColor
@@ -32,7 +34,7 @@ public class UserProfile extends HealthProfile implements HealthPlan {
 
         sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
         sb.append(Ansi.BOLD + Ansi.BRIGHT_WHITE + "  ║           📅  WEEKLY SCHEDULE                ║\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN  + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
 
         List<String> schedule = buildSchedule();
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -43,6 +45,7 @@ public class UserProfile extends HealthProfile implements HealthPlan {
             boolean isWeekend = days[i].equals("Saturday") || days[i].equals("Sunday");
             String dayColor = isWeekend ? Ansi.BRIGHT_MAGENTA : Ansi.BRIGHT_YELLOW;
             String actColor = isWeekend ? Ansi.MAGENTA : Ansi.WHITE;
+
             sb.append("  " + Ansi.BOLD + Ansi.BRIGHT_CYAN + "║  " + Ansi.RESET
                     + dayIcons[i] + " " + Ansi.BOLD + dayColor + padRight(days[i], 11) + Ansi.RESET
                     + Ansi.BLUE + "│ " + Ansi.RESET
@@ -80,7 +83,7 @@ public class UserProfile extends HealthProfile implements HealthPlan {
     @SafeVarargs
     private final <T> List<T> mergeToList(T... items) {
         List<T> list = new ArrayList<>();
-        Collections.addAll(list, items);
+        for (T item : items) list.add(item);
         return list;
     }
 
