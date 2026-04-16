@@ -1,20 +1,20 @@
 # 🌿 Holistic Health System
 
-ระบบประเมินสุขภาพแบบองค์รวม (Mind + Body) ที่สร้างแผนออกกำลังกายและคำแนะนำเฉพาะบุคคล  
-เขียนด้วยภาษา **Java** แบบ Single-file โดยใช้หลักการ OOP ครบถ้วน
+A holistic health assessment system (mind + body) that creates personalized exercise plans and advice.
+Written in **Java** as a single application file, using full object-oriented programming (OOP) principles
 
 ---
 
 ## ✨ Features
 
-| ฟีเจอร์ | รายละเอียด |
+| Features | details |
 |---------|-----------|
-| 🧠 Mental Health Assessment | Quiz 5 ข้อ หรือเลือกสถานะเองได้ (Depressed / Stressed / Normal) |
-| ⚖️ BMI Calculator | คำนวณจากน้ำหนัก (kg) + ส่วนสูง (cm) พร้อมจัดหมวดหมู่ตามเกณฑ์ WHO |
-| 🏋️ Personalized Workout Plan | ตาราง 7 วัน ปรับตาม mental status + BMI + goal |
-| 💡 Health Advice | คำแนะนำเฉพาะบุคคลใน 3 มิติ: จิตใจ, BMI, เป้าหมาย |
-| 💾 File Save/Load | บันทึก records ลง `health_records.txt` และอ่านกลับมาได้ |
-| 🎨 ANSI Color UI | ตกแต่ง terminal ด้วยสีและ style สวยงาม |
+| 🧠 Mental Health Assessment | 5-question quiz or choose your own status. (Depressed / Stressed / Normal) |
+| ⚖️ BMI Calculator | Calculated from weight (kg) + height (cm), and categorized according to WHO criteria |
+| 🏋️ Personalized Workout Plan | 7-day schedule adjusted according to mental status + BMI + goal |
+| 💡 Health Advice | Personalized recommendations in 3 dimensions: Mindset, BMI, Goals |
+| 💾 File Save/Load | Records are saved to `health_records.txt` and can be read back |
+| 🎨 ANSI Color UI | Decorate the terminal with beautiful colors and style |
 
 ---
 
@@ -36,9 +36,7 @@ HolisticHealthSystem.java
 └── HolisticHealthSystem (main)   ← Entry Point
 ```
 
----
-
-## 🚀 วิธีรันโปรแกรม
+## 🚀 How to run the program
 
 ### Prerequisites
 - Java JDK 8 ขึ้นไป
@@ -53,7 +51,7 @@ javac src/HolisticHealthSystem.java -d out
 java -cp out HolisticHealthSystem
 ```
 
-หรือถ้าอยู่ใน directory เดียวกับไฟล์:
+Or if it's in the same directory as the file:
 
 ```bash
 javac HolisticHealthSystem.java
@@ -62,7 +60,7 @@ java HolisticHealthSystem
 
 ---
 
-## 📋 การใช้งาน
+## 📋 Usage
 
 ```
   ============================================
@@ -76,12 +74,12 @@ java HolisticHealthSystem
   3. Exit
 ```
 
-### ขั้นตอน Assessment
-1. **กรอกชื่อ**
-2. **Step 1 – Mental Health**: เลือกทำ quiz 5 ข้อ หรือบอกสถานะเอง
-3. **Step 2 – BMI**: กรอกน้ำหนัก (kg) และส่วนสูง (cm)
-4. **Step 3 – Goal**: เลือกเป้าหมาย (ลดน้ำหนัก / เพิ่มกล้ามเนื้อ / รักษาน้ำหนัก)
-5. ระบบสร้าง Workout Plan + คำแนะนำ และบันทึกลง `health_records.txt` อัตโนมัติ
+### Assessment steps
+1. **Enter name**
+2. **Step 1 – Mental Health**: Choose to answer a 5-question quiz or state your status yourself
+3. **Step 2 – BMI**: Enter your weight (kg) and height (cm)
+4. **Step 3 – Goal**: Choose a goal (weight loss / muscle gain / weight maintenance)
+5. The system automatically generates a workout plan and instructions and saves them to `health_records.txt`
 
 ---
 
@@ -90,8 +88,8 @@ java HolisticHealthSystem
 ```
 HolisticHealthSystem/
 ├── src/
-│   └── HolisticHealthSystem.java   ← Source code หลัก
-├── health_records.txt              ← ไฟล์บันทึก (สร้างอัตโนมัติตอนรัน)
+│   └── HolisticHealthSystem.java   ← Main source code
+├── health_records.txt              ← Log file (automatically created during runtime)
 ├── .gitignore
 └── README.md
 ```
@@ -100,7 +98,7 @@ HolisticHealthSystem/
 
 ## 🧪 BMI Categories (WHO Standard)
 
-| BMI | หมวดหมู่ |
+| BMI | Category |
 |-----|---------|
 | < 18.5 | Underweight |
 | 18.5 – 24.9 | Normal |
@@ -111,7 +109,7 @@ HolisticHealthSystem/
 
 ## 📊 Mental Health Quiz Scoring
 
-| คะแนน | ผลลัพธ์ |
+| score | result |
 |-------|--------|
 | 7 – 10 | DEPRESSED |
 | 3 – 6 | STRESSED |
