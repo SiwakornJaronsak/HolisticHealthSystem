@@ -1,4 +1,4 @@
-interface HealthPlan {
+public interface HealthPlan {
     String generateWorkoutPlan();
     String getAdvice();
 }
