@@ -39,11 +39,11 @@ public class HolisticHealthSystem {
     static void printMainMenu() {
         System.out.println();
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
-                + "  ╔══════════════════════════════════════════════╗" + Ansi.RESET);
+                + "  ╔═══════════════════════════════════════════════╗" + Ansi.RESET);
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_WHITE
-                + "  ║              🌿  MAIN MENU  🌿               ║" + Ansi.RESET);
+                + "  ║              🌿   MAIN MENU   🌿              ║" + Ansi.RESET);
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
-                + "  ╠══════════════════════════════════════════════╣" + Ansi.RESET);
+                + "  ╠═══════════════════════════════════════════════╣" + Ansi.RESET);
         System.out.println(Ansi.CYAN  + "  ║  " + Ansi.BRIGHT_YELLOW + "1." + Ansi.WHITE
                 + "  Start Health Assessment                  " + Ansi.CYAN + "║" + Ansi.RESET);
         System.out.println(Ansi.CYAN  + "  ║  " + Ansi.BRIGHT_YELLOW + "2." + Ansi.WHITE
@@ -51,7 +51,7 @@ public class HolisticHealthSystem {
         System.out.println(Ansi.CYAN  + "  ║  " + Ansi.BRIGHT_YELLOW + "3." + Ansi.WHITE
                 + "  Exit                                     " + Ansi.CYAN + "║" + Ansi.RESET);
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
-                + "  ╚══════════════════════════════════════════════╝" + Ansi.RESET);
+                + "  ╚═══════════════════════════════════════════════╝" + Ansi.RESET);
         System.out.print(Ansi.BOLD + Ansi.YELLOW + "\n  ▶  Enter choice (1-3): " + Ansi.RESET);
     }
 
@@ -105,7 +105,7 @@ public class HolisticHealthSystem {
             System.out.println();
             System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
                     + "  ╔══════════════════════════════════════════════╗\n"
-                    + "  ║          🩺  HEALTH ASSESSMENT               ║\n"
+                    + "  ║             🩺 HEALTH ASSESSMENT             ║\n"
                     + "  ╚══════════════════════════════════════════════╝" + Ansi.RESET);
 
             System.out.print(Ansi.BOLD + Ansi.CYAN + "\n  ▶  Enter your name: " + Ansi.RESET);
@@ -245,9 +245,9 @@ public class HolisticHealthSystem {
             String[] q = questions[qi];
             System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
                     + "  ┌─ " + (qi + 1) + "/" + questions.length
-                    + " ─────────────────────────────────────┐" + Ansi.RESET);
-            System.out.println(Ansi.BOLD + Ansi.WHITE + "  │  " + q[0] + Ansi.RESET);
-            System.out.println(Ansi.BRIGHT_CYAN + "  └────────────────────────────────────────────┘" + Ansi.RESET);
+                    + " ───────────────────────────────────────────────────────────────┐" + Ansi.RESET);
+            System.out.println(Ansi.BOLD + Ansi.WHITE + "  ║ " + q[0] + Ansi.RESET);
+            System.out.println(Ansi.BRIGHT_CYAN + "  └─────────────────────────────────────────────────────────────────────┘" + Ansi.RESET);
             System.out.println(Ansi.BOLD + Ansi.BRIGHT_RED    + "     " + q[1] + Ansi.RESET);
             System.out.println(Ansi.BOLD + Ansi.BRIGHT_YELLOW + "     " + q[2] + Ansi.RESET);
             System.out.println(Ansi.BOLD + Ansi.BRIGHT_GREEN  + "     " + q[3] + Ansi.RESET);
@@ -283,20 +283,19 @@ public class HolisticHealthSystem {
         String bar = buildProgressBar(pct, 30);
 
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
-                + "  ╔══════════════════════════════════════════════╗\n"
-                + "  ║              📊  QUIZ RESULTS                ║\n"
-                + "  ╠══════════════════════════════════════════════╣" + Ansi.RESET);
+                + "  ╔═══════════════════════════════════════════════════╗\n"
+                + "  ║                 📊  QUIZ RESULTS                  ║\n"
+                + "  ╠═══════════════════════════════════════════════════╣" + Ansi.RESET);
         System.out.printf(Ansi.BOLD + Ansi.WHITE
-                + "  ║  Score   : %d / %d  (%d%%)\n" + Ansi.RESET, totalScore, maxScore, pct);
-        System.out.println(Ansi.WHITE + "  ║  " + bar + Ansi.RESET);
-
+                + "  ║  Score   : %d / %d  (%d%%)                        ║\n" + Ansi.RESET, totalScore, maxScore, pct);
+        System.out.println(Ansi.WHITE + "  ║  " + bar + "            ║  " + Ansi.RESET);
         MentalStatus result;
         if (totalScore >= 11) {
             result = MentalStatus.DEPRESSED;
-            System.out.println(Ansi.BOLD + Ansi.BRIGHT_RED    + "  ║  Result  : DEPRESSED 😔" + Ansi.RESET);
+            System.out.println(Ansi.BOLD + Ansi.BRIGHT_RED    + "  ║  Result  : DEPRESSED 😔                           ║" + Ansi.RESET);
             System.out.println(Ansi.RED
-                    + "  ║  Your responses suggest signs of depression.\n"
-                    + "  ║  Please be gentle with yourself and seek support." + Ansi.RESET);
+                    + "  ║  Your responses suggest signs of depression.      ║\n"
+                    + "  ║  Please be gentle with yourself and seek support. ║" + Ansi.RESET);
         } else if (totalScore >= 5) {
             result = MentalStatus.STRESSED;
             System.out.println(Ansi.BOLD + Ansi.BRIGHT_YELLOW + "  ║  Result  : STRESSED 😰" + Ansi.RESET);
@@ -311,7 +310,7 @@ public class HolisticHealthSystem {
                     + "  ║  Keep up the great work." + Ansi.RESET);
         }
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
-                + "  ╚══════════════════════════════════════════════╝" + Ansi.RESET);
+                + "  ╚═══════════════════════════════════════════════════╝" + Ansi.RESET);
 
         return result;
     }
@@ -327,7 +326,7 @@ public class HolisticHealthSystem {
         System.out.println();
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
                 + "  ┌──────────────────────────────────────────────┐\n"
-                + "  │    Step 2 · BMI Calculation ⚖               │\n"
+                + "  │          Step 2 · BMI Calculation ⚖          │\n"
                 + "  └──────────────────────────────────────────────┘" + Ansi.RESET);
 
         double weight   = readPositiveDouble(Ansi.CYAN + "  ▶  Enter your weight (kg): " + Ansi.RESET);
@@ -344,7 +343,7 @@ public class HolisticHealthSystem {
         System.out.println();
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
                 + "  ┌──────────────────────────────────────────────┐\n"
-                + "  │    Step 3 · Your Health Goal 🎯              │\n"
+                + "  │       Step 3 · Your Health Goal 🎯           │\n"
                 + "  └──────────────────────────────────────────────┘" + Ansi.RESET);
         System.out.println(Ansi.WHITE + "  What is your main goal?" + Ansi.RESET);
         System.out.println(Ansi.CYAN + "  1. " + Ansi.MAGENTA + "Lose Weight"     + Ansi.RESET);
@@ -390,7 +389,7 @@ public class HolisticHealthSystem {
                     System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
                             + "  ╠══════════════════════════════════════════════╣" + Ansi.RESET);
                     System.out.println(Ansi.CYAN + "  ║  " + Ansi.BRIGHT_YELLOW + "0." + Ansi.WHITE
-                            + "  ← Back to Main Menu                     " + Ansi.CYAN + "║" + Ansi.RESET);
+                            + "  ← Back to Main Menu             "+ Ansi.CYAN +"║" + Ansi.RESET);
                     System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
                             + "  ╚══════════════════════════════════════════════╝" + Ansi.RESET);
                     System.out.print(Ansi.BOLD + Ansi.YELLOW + "\n  ▶  Enter choice (0): " + Ansi.RESET);
@@ -482,7 +481,7 @@ public class HolisticHealthSystem {
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
                 + "  ╔══════════════════════════════════════════════╗" + Ansi.RESET);
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_WHITE
-                + "  ║   🌿  HOLISTIC HEALTH SYSTEM  🌿             ║" + Ansi.RESET);
+                + "  ║         🌿  HOLISTIC HEALTH SYSTEM  🌿       ║" + Ansi.RESET);
         System.out.println(Ansi.BOLD + Ansi.BRIGHT_CYAN
                 + "  ╠══════════════════════════════════════════════╣" + Ansi.RESET);
         System.out.println(Ansi.BOLD + Ansi.WHITE
@@ -491,3 +490,4 @@ public class HolisticHealthSystem {
                 + "  ╚══════════════════════════════════════════════╝" + Ansi.RESET);
     }
 }
+
