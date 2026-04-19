@@ -254,7 +254,4 @@ public class UserProfile extends HealthProfile implements HealthPlan {
         return sb.toString();
     }
 }
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_MAGENTA + "  ╚══════════════════════════════════════════════╝\n" + Ansi.RESET);
-        return sb.toString();
-    }
-}
+
