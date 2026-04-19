@@ -15,24 +15,24 @@ public class UserProfile extends HealthProfile implements HealthPlan {
         StringBuilder sb = new StringBuilder();
 
         sb.append("\n");
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN  + "  ╔══════════════════════════════════════════════╗\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_WHITE  + "  ║        🏋  PERSONALIZED WORKOUT PLAN  🧘     ║\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN   + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN  + "  ╔══════════════════════════════════════════════════╗\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_WHITE  + "  ║          🏋  PERSONALIZED WORKOUT PLAN  🧘        ║\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN   + "  ╠══════════════════════════════════════════════════╣\n" + Ansi.RESET);
 
-        sb.append(Ansi.BOLD + Ansi.CYAN    + "  ║  Name    : " + Ansi.BRIGHT_WHITE  + padRight(name, 33) + "║\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.CYAN    + "  ║  Name    : " + Ansi.BRIGHT_WHITE  + padRight(name, 33) + "     ║\n" + Ansi.RESET);
         sb.append(Ansi.BOLD + Ansi.CYAN    + "  ║  BMI     : " + bmiColor
                 + padRight(String.format("%.1f", bmi) + " (" + getBMICategory() + ")", 33) + Ansi.RESET
-                + Ansi.BOLD + Ansi.CYAN + "║\n" + Ansi.RESET);
+                + Ansi.BOLD + Ansi.CYAN + "     ║\n" + Ansi.RESET);
         sb.append(Ansi.BOLD + Ansi.CYAN    + "  ║  Mental  : " + getMentalColor()
                 + padRight(mentalStatus.toString(), 33) + Ansi.RESET
-                + Ansi.BOLD + Ansi.CYAN + "║\n" + Ansi.RESET);
+                + Ansi.BOLD + Ansi.CYAN + "     ║\n" + Ansi.RESET);
         sb.append(Ansi.BOLD + Ansi.CYAN    + "  ║  Goal    : " + Ansi.BRIGHT_YELLOW
                 + padRight(goal.toString(), 33) + Ansi.RESET
-                + Ansi.BOLD + Ansi.CYAN + "║\n" + Ansi.RESET);
+                + Ansi.BOLD + Ansi.CYAN + "     ║\n" + Ansi.RESET);
 
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_WHITE + "  ║           📅  WEEKLY SCHEDULE                ║\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN  + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN + "  ╠══════════════════════════════════════════════════╣\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_WHITE + "  ║               📅  WEEKLY SCHEDULE                ║\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN  + "  ╠══════════════════════════════════════════════════╣\n" + Ansi.RESET);
 
         List<String> schedule = buildSchedule();
         String[] days         = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -49,7 +49,7 @@ public class UserProfile extends HealthProfile implements HealthPlan {
                     + actColor + activity + Ansi.RESET + "\n");
         }
 
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN + "  ╚══════════════════════════════════════════════╝\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_CYAN + "  ╚══════════════════════════════════════════════════╝\n" + Ansi.RESET);
         return sb.toString();
     }
 
@@ -181,9 +181,9 @@ public class UserProfile extends HealthProfile implements HealthPlan {
         StringBuilder sb = new StringBuilder();
 
         sb.append("\n");
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_MAGENTA + "  ╔══════════════════════════════════════════════╗\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_WHITE    + "  ║          💡  PERSONALIZED HEALTH ADVICE      ║\n" + Ansi.RESET);
-        sb.append(Ansi.BOLD + Ansi.BRIGHT_MAGENTA  + "  ╠══════════════════════════════════════════════╣\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_MAGENTA + "  ╔════════════════════════════════════════════════════════╗\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_WHITE    + "  ║             💡  PERSONALIZED HEALTH ADVICE             ║\n" + Ansi.RESET);
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_MAGENTA  + "  ╠════════════════════════════════════════════════════════╣\n" + Ansi.RESET);
 
         // Mental advice
         switch (mentalStatus) {
@@ -250,6 +250,10 @@ public class UserProfile extends HealthProfile implements HealthPlan {
                 break;
         }
 
+        sb.append(Ansi.BOLD + Ansi.BRIGHT_MAGENTA + "  ╚════════════════════════════════════════════════════════╝\n" + Ansi.RESET);
+        return sb.toString();
+    }
+}
         sb.append(Ansi.BOLD + Ansi.BRIGHT_MAGENTA + "  ╚══════════════════════════════════════════════╝\n" + Ansi.RESET);
         return sb.toString();
     }
