@@ -1,27 +1,20 @@
 # 🌿 Holistic Health System
 
-A holistic health assessment system (mind + body) that creates personalized exercise plans and advice
-**Java OOP | MIT License**
-
----
-
-## 📋 Overview
-
-Holistic Health System is a Java-based terminal application that integrates physical and mental health assessment into a single platform.
-It evaluates the user's mental status through a 9-question quiz, calculates BMI, and generates a fully personalized 7-day workout plan along with tailored health advice — all saved to a local file.
+A holistic health assessment system (mind + body) that creates personalized exercise plans and advice.
+Written in **Java** as a single application file, using full object-oriented programming (OOP) principles
 
 ---
 
 ## ✨ Features
 
-| Feature                     | Details                                                                   |
-| --------------------------- | ------------------------------------------------------------------------- |
-| 🧠 Mental Health Assessment | 9-question quiz or choose your own status (Depressed / Stressed / Normal) |
-| ⚖️ BMI Calculator           | Calculated from weight (kg) + height (cm), categorized per WHO criteria   |
-| 🏋️ Workout Plan            | 7-day schedule adjusted by mental status + BMI + goal                     |
-| 💡 Health Advice            | Recommendations across Mindset, BMI, Goals                                |
-| 💾 File Save / Load         | Records saved to `health_records.txt`                                     |
-| 🎨 ANSI UI                  | Colored terminal with styled output                                       |
+| Features | details |
+|---------|-----------|
+| 🧠 Mental Health Assessment | 5-question quiz or choose your own status. (Depressed / Stressed / Normal) |
+| ⚖️ BMI Calculator | Calculated from weight (kg) + height (cm), and categorized according to WHO criteria |
+| 🏋️ Personalized Workout Plan | 7-day schedule adjusted according to mental status + BMI + goal |
+| 💡 Health Advice | Personalized recommendations in 3 dimensions: Mindset, BMI, Goals |
+| 💾 File Save/Load | Records are saved to `health_records.txt` and can be read back |
+| 🎨 ANSI Color UI | Decorate the terminal with beautiful colors and style |
 
 ---
 
@@ -30,57 +23,39 @@ It evaluates the user's mental status through a 9-question quiz, calculates BMI,
 ```
 HolisticHealthSystem.java
 │
-├── InvalidBMIInputException
-├── InvalidMenuChoiceException
-├── Ansi
-├── MentalStatus (enum)
-├── Goal (enum)
-├── HealthPlan (interface)
-├── HealthProfile (abstract)
-│   └── UserProfile
-├── HealthRecordStore<T>
-├── FileUtil
-└── HolisticHealthSystem (main)
+├── InvalidBMIInputException      ← Custom Exception
+├── InvalidMenuChoiceException    ← Custom Exception
+├── Ansi                          ← ANSI Color Constants
+├── MentalStatus (enum)           ← DEPRESSED / STRESSED / NORMAL
+├── Goal (enum)                   ← LOSE_WEIGHT / BUILD_MUSCLE / MAINTAIN_WEIGHT
+├── HealthPlan (interface)        ← generateWorkoutPlan() / getAdvice()
+├── HealthProfile (abstract)      ← Base Class
+│   └── UserProfile               ← Inheritance + implements HealthPlan
+├── HealthRecordStore<T>          ← Generic Collection Class
+├── FileUtil                      ← File I/O Utility
+└── HolisticHealthSystem (main)   ← Entry Point
 ```
 
----
-
-## 📁 Project Structure
-
-```
-src/
-├── core/
-│   ├── HealthRecordStore.java
-│   └── HolisticHealthSystem.java
-├── exceptions/
-│   ├── InvalidBMIInputException.java
-│   └── InvalidMenuChoiceException.java
-├── models/
-│   ├── FileUtil.java
-│   ├── Goal.java
-│   ├── HealthPlan.java
-│   ├── HealthProfile.java
-│   ├── MentalStatus.java
-│   └── UserProfile.java
-├── utils/
-│   ├── Ansi.java
-│   └── FileUtil.java
-└── README.md
-```
-
----
-
-## 🚀 How to Run
+## 🚀 How to run the program
 
 ### Prerequisites
-
-* Java JDK 8+
+- Java JDK 8 ขึ้นไป
 
 ### Compile & Run
 
 ```bash
-javac src/core/HolisticHealthSystem.java -d out
+# Compile
+javac src/HolisticHealthSystem.java -d out
+
+# Run
 java -cp out HolisticHealthSystem
+```
+
+Or if it's in the same directory as the file:
+
+```bash
+javac HolisticHealthSystem.java
+java HolisticHealthSystem
 ```
 
 ---
@@ -88,47 +63,62 @@ java -cp out HolisticHealthSystem
 ## 📋 Usage
 
 ```
-╔══════════════════════════════════════════════╗
-║        🌿  HOLISTIC HEALTH SYSTEM  🌿       ║
-╠══════════════════════════════════════════════╣
-║  1. Start Health Assessment                  ║
-║  2. View Saved Records                       ║
-║  3. Exit                                     ║
-╚══════════════════════════════════════════════╝
+  ============================================
+         HOLISTIC HEALTH SYSTEM
+     Your Mind + Body Wellness Guide
+  ============================================
+
+  MAIN MENU:
+  1. Start Health Assessment
+  2. View Saved Records (from file)
+  3. Exit
 ```
 
-### Assessment Steps
-
-* Enter your name
-* Step 1 – Mental Health: Take the 9-question quiz or select your status
-* Step 2 – BMI: Enter weight (kg) and height (cm)
-* Step 3 – Goal: Choose Lose Weight / Build Muscle / Maintain Weight
-* System generates a personalized plan and saves to `health_records.txt`
-
----
-
-## 🧪 BMI Categories (WHO)
-
-| BMI         | Category    |
-| ----------- | ----------- |
-| < 18.5      | Underweight |
-| 18.5 – 24.9 | Normal      |
-| 25.0 – 29.9 | Overweight  |
-| ≥ 30.0      | Obese       |
+### Assessment steps
+1. **Enter name**
+2. **Step 1 – Mental Health**: Choose to answer a 5-question quiz or state your status yourself
+3. **Step 2 – BMI**: Enter your weight (kg) and height (cm)
+4. **Step 3 – Goal**: Choose a goal (weight loss / muscle gain / weight maintenance)
+5. The system automatically generates a workout plan and instructions and saves them to `health_records.txt`
 
 ---
 
-## 📊 Mental Health Quiz
+## 📁 Project Structure
 
-| Score   | Result       |
-| ------- | ------------ |
-| 0 – 4   | NORMAL 😊    |
-| 5 – 10  | STRESSED 😰  |
-| 11 – 18 | DEPRESSED 😔 |
+```
+HolisticHealthSystem/
+├── src/
+│   └── HolisticHealthSystem.java   ← Main source code
+├── health_records.txt              ← Log file (automatically created during runtime)
+├── .gitignore
+└── README.md
+```
+
+---
+
+## 🧪 BMI Categories (WHO Standard)
+
+| BMI | Category |
+|-----|---------|
+| < 18.5 | Underweight |
+| 18.5 – 24.9 | Normal |
+| 25.0 – 29.9 | Overweight |
+| ≥ 30.0 | Obese |
+
+---
+
+## 📊 Mental Health Quiz Scoring
+
+| score | result |
+|-------|--------|
+| 7 – 10 | DEPRESSED |
+| 3 – 6 | STRESSED |
+| 0 – 2 | NORMAL |
+
+แต่ละข้อ: A = 2 คะแนน | B = 1 คะแนน | C = 0 คะแนน
 
 ---
 
 ## 📝 License
 
 MIT License — Free to use and modify.
-
